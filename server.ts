@@ -1,7 +1,13 @@
 import { serve } from 'https://deno.land/std@0.123.0/http/server.ts'
+import { parse } from 'https://deno.land/std/flags/mod.ts'
 
 const cacheExpiration = 1000 * 60 * 60
-const url = 'https://www.alko.fi/tuotteet/319027/Gambina-muovipullo/'
+const productUrl = 'https://www.alko.fi/tuotteet/319027/Gambina-muovipullo/'
+
+const { args } = Deno
+const DEFAULT_PORT = 8080
+const ARGS_PORT = parse(args).port
+const PORT = ARGS_PORT ? Number(ARGS_PORT) : DEFAULT_PORT
 
 type GambinaIndex = number
 
@@ -15,12 +21,12 @@ let cache: Cache = {
     time: null
 }
 
-async function fetchHtml() {
+async function fetchHtml(url: string) {
     const res = await fetch(url)
     return res.text()
 }
 
-function parseIndex(html: string): GambinaIndex {
+function parseIndexValue(html: string): GambinaIndex {
     const regex = new RegExp(/itemprop="price"\s+content="(\d+\.\d+)"/)
     const matches = regex.exec(html)
     if (!matches || !matches[1]) throw new Error('Failed to parse the index')
@@ -38,8 +44,8 @@ function updatedCache(value: GambinaIndex): Cache {
 async function getOrFetch() {
     if (!cache.time || Date.now() > cache.time + cacheExpiration) {
         try {
-            const html = await fetchHtml()
-            const index = parseIndex(html)
+            const html = await fetchHtml(productUrl)
+            const index = parseIndexValue(html)
             cache = updatedCache(index)
         } catch (e) {
             console.error(e)
@@ -72,5 +78,5 @@ async function handler(_req: Request): Promise<Response> {
     })
 }
 
-serve(handler, { port: 8080 })
-console.log('server running on port 8080')
+serve(handler, { port: PORT })
+console.log(`server running on port ${PORT}`)
