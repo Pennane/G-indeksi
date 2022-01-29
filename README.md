@@ -1,4 +1,4 @@
-# Gambiinaindeksi
+# Gambinaindeksi
 
 [Hostattuna herokussa](https://g-indeksi.herokuapp.com)
 
@@ -9,7 +9,7 @@ Portissa 8080
 ```
 deno run --allow-net src/server.ts
 ```
-Vaihtoehtoisella portilla
+Jossain muussa portissa
 
 ```
 deno run --allow-net src/server.ts --port=3000
