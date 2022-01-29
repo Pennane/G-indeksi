@@ -1,6 +1,7 @@
 # Gambiinaindeksi
 
 [Hostattuna herokussa](https://g-indeksi.herokuapp.com)
+
 [JSON rajapinnan linkki](https://g-indeksi.herokuapp.com/api/index)
 
 ## Paikallisesti ajettavissa Denolla:
