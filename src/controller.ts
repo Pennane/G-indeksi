@@ -1,9 +1,10 @@
 import home from './templates/home.ts'
-import { getOrFetch } from './cache.ts'
-import { apiHtml, apiServerError, apiSuccess } from './util/response.ts'
 
-async function getCurrentIndex(_req: Request): Promise<Response> {
-    const value = await getOrFetch()
+import { unknownEndpoint, unsupportedMethod, apiHtml, apiServerError, apiSuccess } from './util/responses.ts'
+import { getValue } from './service.ts'
+
+async function getIndexValue(_req: Request): Promise<Response> {
+    const value = await getValue()
 
     if (!value) {
         const body = JSON.stringify({ message: 'Failed to get', value: null })
@@ -14,9 +15,29 @@ async function getCurrentIndex(_req: Request): Promise<Response> {
     return apiSuccess(body)
 }
 
-async function getRoot(_req: Request): Promise<Response> {
-    const value = await getOrFetch()
+async function getHome(_req: Request): Promise<Response> {
+    const value = await getValue()
     return apiHtml(home({ value }))
 }
 
-export { getCurrentIndex, getRoot }
+function requestHandler(req: Request) {
+    if (req.method !== 'GET' && req.method !== 'HEAD') {
+        return unsupportedMethod(req)
+    }
+
+    const url = new URL(req.url)
+
+    switch (url.pathname) {
+        case '/api/index': {
+            return getIndexValue(req)
+        }
+        case '/': {
+            return getHome(req)
+        }
+        default: {
+            return unknownEndpoint(req)
+        }
+    }
+}
+
+export { requestHandler }

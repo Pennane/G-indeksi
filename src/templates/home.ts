@@ -10,11 +10,7 @@ export default function (data: { value: number | null }) {
             </head>
             <body>
                 <h1>Päivän G-indeksi hakemisessa on havaittu vaikeuksia.</h1>
-<<<<<<< HEAD
                 <a href="/api/index">Tavallisesti G-indeksin voi hakea JSON muodossa täältä</a>
-=======
-                <a href="/api/v1/index">Tavallisesti G-indeksin voi hakea JSON muodossa täältä</a>
->>>>>>> 30fa705271ed580826ee6692b45083c634bece2d
             </body>
         </html>
         `

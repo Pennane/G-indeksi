@@ -26,4 +26,16 @@ function apiServerError(body: string): Response {
     })
 }
 
-export { apiSuccess, apiServerError, apiHtml }
+function unknownEndpoint(_req: Request): Response {
+    return new Response('Unknown endpoint', {
+        status: 404
+    })
+}
+
+function unsupportedMethod(_req: Request): Response {
+    return new Response('Unsupported method', {
+        status: 501
+    })
+}
+
+export { apiSuccess, apiServerError, apiHtml, unknownEndpoint, unsupportedMethod }

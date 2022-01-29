@@ -1,4 +1,4 @@
-type GambinaIndex = number
+type GambinaIndex = number | null
 
 interface Cache {
     value: GambinaIndex | null
