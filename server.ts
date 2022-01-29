@@ -59,7 +59,7 @@ async function handler(_req: Request): Promise<Response> {
     const index = await getOrFetch()
 
     if (!index) {
-        const body = JSON.stringify({ message: 'Failed to get' })
+        const body = JSON.stringify({ message: 'Failed to get', index: null })
         return new Response(body, {
             status: 503,
             headers: {
