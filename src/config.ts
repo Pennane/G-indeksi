@@ -17,8 +17,6 @@ const DB = {
     name: Deno.env.get('db_name') || env.db_name
 }
 
-console.log(DB)
-
 const argsPort = parsedArgs.port
 const PORT = argsPort ? Number(argsPort) : DEFAULT_PORT
 
