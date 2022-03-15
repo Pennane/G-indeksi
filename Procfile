@@ -1,1 +1,1 @@
-web: deno run --allow-net=:${PORT},www.alko.fi src/server.ts --port=${PORT}
+web: deno run --allow-read --allow-net src/server.ts --port=${PORT}

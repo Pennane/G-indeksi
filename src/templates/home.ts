@@ -27,6 +27,8 @@ export default function (data: { value: number | null }) {
             <body>
                 <h1>Päivän G-indeksi on ${String(data.value)}</h1>
                 <a href="/api/index">G-indeksin voi hakea JSON muodossa täältä</a>
+                <br>
+                <a href="/api/history">G-indeksin tallennetun historian voi hakea JSON muodossa täältä</a>
             </body>
         </html>
     `

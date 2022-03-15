@@ -1,22 +1,40 @@
-import type { GambinaIndex, Cache } from './types.d.ts'
-import { CACHE_EXPIRATION } from './config.ts'
+import type { GambinaIndex, IndexCache, History, HistoryCache } from './types.d.ts'
+import { INDEX_EXPIRATION, INDEX_HISTORY_EXPIRATION } from './config.ts'
 
-let cache: Cache = {
+let indexCache: IndexCache = {
+    value: null,
+    time: null
+}
+
+let historyCache: HistoryCache = {
     value: null,
     time: null
 }
 
 // Update the cache by mutation
-function setCache(value: GambinaIndex): void {
-    cache = { value, time: Date.now() }
+function setIndexCache(value: GambinaIndex): void {
+    indexCache = { value, time: Date.now() }
 }
 
-async function getOrSet(settingFunction: () => GambinaIndex | Promise<GambinaIndex>) {
-    if (!cache.time || Date.now() > cache.time + CACHE_EXPIRATION) {
-        setCache(await Promise.resolve(settingFunction()))
+async function getOrSetIndexCache(settingFunction: () => GambinaIndex | Promise<GambinaIndex>) {
+    if (!indexCache.time || Date.now() > indexCache.time + INDEX_EXPIRATION) {
+        setIndexCache(await Promise.resolve(settingFunction()))
     }
 
-    return cache.value
+    return indexCache.value
 }
 
-export { getOrSet }
+// Update the cache by mutation
+function setHistoryCache(value: History): void {
+    historyCache = { value, time: Date.now() }
+}
+
+async function getOrSetHistoryCache(settingFunction: () => History | Promise<History>) {
+    if (!historyCache.time || Date.now() > historyCache.time + INDEX_HISTORY_EXPIRATION) {
+        setHistoryCache(await Promise.resolve(settingFunction()))
+    }
+
+    return historyCache.value
+}
+
+export { getOrSetIndexCache, getOrSetHistoryCache }

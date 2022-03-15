@@ -1,22 +1,34 @@
 import home from './templates/home.ts'
 
 import { unknownEndpoint, unsupportedMethod, apiHtml, apiServerError, apiSuccess } from './util/responses.ts'
-import { getValue } from './service.ts'
+import { getIndex, getHistory } from './service.ts'
 
 async function getIndexValue(_req: Request): Promise<Response> {
-    const value = await getValue()
+    const index = await getIndex()
 
-    if (!value) {
+    if (!index) {
         const body = JSON.stringify({ message: 'Failed to get', value: null })
         return apiServerError(body)
     }
 
-    const body = JSON.stringify({ value })
+    const body = JSON.stringify({ index })
+    return apiSuccess(body)
+}
+
+async function getHistoryValue(_req: Request): Promise<Response> {
+    const history = await getHistory()
+
+    if (!history) {
+        const body = JSON.stringify({ message: 'Failed to get', value: null })
+        return apiServerError(body)
+    }
+
+    const body = JSON.stringify({ history })
     return apiSuccess(body)
 }
 
 async function getHome(_req: Request): Promise<Response> {
-    const value = await getValue()
+    const value = await getIndex()
     return apiHtml(home({ value }))
 }
 
@@ -30,6 +42,9 @@ function requestHandler(req: Request) {
     switch (url.pathname) {
         case '/api/index': {
             return getIndexValue(req)
+        }
+        case '/api/history': {
+            return getHistoryValue(req)
         }
         case '/': {
             return getHome(req)
