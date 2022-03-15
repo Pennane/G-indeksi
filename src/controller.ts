@@ -1,5 +1,4 @@
-import home from './templates/home.ts'
-
+import home from './views/home.ts'
 import { unknownEndpoint, unsupportedMethod, apiHtml, apiServerError, apiSuccess } from './util/responses.ts'
 import { getIndex, getHistory } from './service.ts'
 
@@ -28,8 +27,7 @@ async function getHistoryValue(_req: Request): Promise<Response> {
 }
 
 async function getHome(_req: Request): Promise<Response> {
-    const value = await getIndex()
-    return apiHtml(home({ value }))
+    return apiHtml(home())
 }
 
 function requestHandler(req: Request) {
