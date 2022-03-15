@@ -1,4 +1,4 @@
-import { parse } from 'https://deno.land/std/flags/mod.ts'
+import { parse } from 'https://deno.land/std@0.129.0/flags/mod.ts'
 import { config } from 'https://deno.land/x/dotenv@v3.2.0/mod.ts'
 const env = config()
 
