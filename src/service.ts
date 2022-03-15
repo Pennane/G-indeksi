@@ -1,7 +1,7 @@
 import type { GambinaIndex, History } from './types.d.ts'
 import { PRODUCT_URL } from './config.ts'
 import { getOrSetIndexCache, getOrSetHistoryCache } from './cache.ts'
-import { findOnePerDay } from './database.ts'
+import { findOnePerDay, insert } from './database.ts'
 
 async function fetchProductPage() {
     const res = await fetch(PRODUCT_URL)
@@ -19,6 +19,12 @@ async function fetchingFunction() {
     try {
         const html = await fetchProductPage()
         const value = parseIndexFromHtml(html)
+
+        // Insert value to database
+        if (value) {
+            insert(value)
+        }
+
         return value
     } catch (e) {
         console.error(e)
