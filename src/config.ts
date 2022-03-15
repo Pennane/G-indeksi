@@ -2,6 +2,9 @@ import { parse } from 'https://deno.land/std@0.129.0/flags/mod.ts'
 import { config } from 'https://deno.land/x/dotenv@v3.2.0/mod.ts'
 const env = config()
 
+console.clear()
+console.log(env)
+
 const { args } = Deno
 const parsedArgs = parse(args)
 
