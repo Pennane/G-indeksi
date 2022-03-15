@@ -7,10 +7,10 @@
 ## Paikallisesti ajettavissa Denolla:
 Portissa 8080
 ```
-deno run --allow-net src/server.ts
+deno run --allow-read --allow-net --allow-env src/server.ts
 ```
 Jossain muussa portissa
 
 ```
-deno run --allow-net src/server.ts --port=3000
+deno run --allow-read --allow-net --allow-env src/server.ts --port=3000
 ```
