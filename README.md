@@ -1,8 +1,8 @@
 # Gambinaindeksi
 
-[Hostattuna herokussa](https://g-indeksi.herokuapp.com)
+[Hostattuna](https://g-indeksi.pennanen.dev/)
 
-[JSON rajapinnan linkki](https://g-indeksi.herokuapp.com/api/index)
+[JSON rajapinnan linkki](https://g-indeksi.pennanen.dev/api/index)
 
 ## Paikallisesti ajettavissa Denolla:
 Portissa 8080
