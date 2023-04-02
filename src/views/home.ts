@@ -121,22 +121,20 @@ export default function () {
         .map((i) => ({ x: new Date(i.timestamp).valueOf(), y: i.value }))
         .sort((a, b) => a.x - b.x)
 
-      const data = {
-        datasets: [
-          {
-            label: 'G-indeksi',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: dataPoints,
-            borderWidth: 1.5,
-            radius: 0
-          }
-        ]
-      }
+      const datasets = [
+        {
+          label: 'G-indeksi',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: dataPoints,
+          borderWidth: 1.5,
+          radius: 0
+        }
+      ]
 
       removeElementChildren(CHART_TARGET)
 
-      new Chart(CHART_TARGET, { ...CHART_CONFIG, data })
+      new Chart(CHART_TARGET, { ...CHART_CONFIG, datasets })
     }
 
     fetch('/api/index')
