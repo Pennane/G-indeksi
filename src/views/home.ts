@@ -1,5 +1,5 @@
 export default function () {
-    return `
+  return `
 <!DOCTYPE html>
 <html lang="fi">
 
@@ -117,7 +117,7 @@ export default function () {
 
     function displayChart(data) {
       const history = data.history
-      const dataPoints = history
+      const datapoints = history
         .map((i) => ({ x: new Date(i.timestamp).valueOf(), y: i.value }))
         .sort((a, b) => a.x - b.x)
 
@@ -126,15 +126,14 @@ export default function () {
           label: 'G-indeksi',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
-          data: dataPoints,
+          data: datapoints,
           borderWidth: 1.5,
           radius: 0
         }
       ]
 
       removeElementChildren(CHART_TARGET)
-
-      new Chart(CHART_TARGET, { ...CHART_CONFIG, datasets })
+      new Chart(CHART_TARGET, { ...CHART_CONFIG, data: {datasets} })
     }
 
     fetch('/api/index')
