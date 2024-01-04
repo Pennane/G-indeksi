@@ -25,15 +25,19 @@ export default function () {
       max-width: 100%;
       margin-bottom: 1rem;
     }
+
+    #index {
+      font-weight: 400;
+    }
   </style>
 </head>
 
 <body>
   <section>
-    <h1>Päivän G-indeksi on <span id="index">(loading...)</span></h1>
+    <h1>Päivän G-indeksi: <span id="index">(loading...)</span></h1>
   </section>
   <section>
-    <h2>G-indeksihistoria</h2>
+    <h2>Kurssikehitys</h2>
     <div>
       <canvas id="chart"></canvas>
     </div>
@@ -46,7 +50,7 @@ export default function () {
         <a href="https://g-indeksi.pennanen.dev/api/index">Päivän G-indeksi</a>
       </li>
       <li>
-        <a href="https://g-indeksi.pennanen.dev/api/history">G-indeksihistoria</a>
+        <a href="https://g-indeksi.pennanen.dev/api/history">Kurssikehitys</a>
       </li>
     </ul>
   </section>
@@ -63,7 +67,7 @@ export default function () {
     const CHART_TARGET = document.getElementById('chart')
 
     const CHART_CONFIG = {
-      type: 'line',
+      type: 'scatter',
       options: {
         interaction: {
           mode: 'nearest',
@@ -127,8 +131,8 @@ export default function () {
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
           data: datapoints,
-          borderWidth: 1.5,
-          radius: 0
+          borderWidth: 0,
+          radius: 2.5,
         }
       ]
 
